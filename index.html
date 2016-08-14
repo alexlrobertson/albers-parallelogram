@@ -1,0 +1,87 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title></title>
+  <style>
+polygon {
+  fill: black;
+}
+  </style>
+  <script>
+function range(length) {
+  return [...Array(length).keys()];
+}
+
+const height = 10;
+const width = 10;
+
+const points = range(height)
+  .map((x) => range(width).map(() => ''));
+
+function yn() {
+  return Math.random() > .5;
+}
+
+function roll() {
+  const roll = randInt(5);
+
+  switch (roll) {
+    case 0:
+      return '◢';
+    case 1:
+      return '◣';
+    case 2:
+      return '◤';
+    case 3:
+      return '◥';
+    default:
+      return '';
+  }
+}
+
+function opposite(input) {
+  switch (input) {
+    case '◢':
+      return '◤';
+    case '◥':
+      return '◣';
+    case '◢':
+      return '◤';
+    case '◣':
+      return '◥';
+    default:
+      return '';
+  }
+}
+
+function randInt(upper) {
+  return Math.floor(Math.random() * upper);
+}
+
+function plot() {
+  const x = randInt(10);
+  const y = randInt(10);
+
+  const fill = roll();
+
+  points[x][y] = fill;
+  console.log(fill);
+  points[x - 1][y] = opposite(fill);
+}
+
+plot();
+
+console.table(points);
+  </script>
+</head>
+<body>
+  <svg xmlns="http://www.w3.org/2000/svg"
+       style="border: 1px solid black"
+    width="1000" height="1000" viewbox="0,0,10,10">
+    <polygon points="0,0 2,2 2,1 1,0"></polygon>
+    <polygon points="2,0 5,3 4,3 2,1"></polygon>
+    <polygon points="2,2 3,2 0,5 0,4"></polygon>
+  </svg>
+</body>
+</html>
